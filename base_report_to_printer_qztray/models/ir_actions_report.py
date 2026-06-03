@@ -9,7 +9,7 @@ from odoo import models
 class IrActionsReport(models.Model):
     _inherit = "ir.actions.report"
 
-    def get_qz_tray_data(self, res_ids, report_type="pdf", report_name="", data=None, label=False):
+    def get_qz_tray_data(self, res_ids, report_type="pdf", report_name="", label=False, data=None):
         if report_type == "pdf":
             result = self.env["ir.actions.report"]._render_qweb_pdf(
                 report_name, res_ids, data
