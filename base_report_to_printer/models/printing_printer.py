@@ -27,6 +27,7 @@ class PrintingPrinter(models.Model):
         required=True,
         default="base",
     )
+    printer_type = fields.Selection(selection=[("document", "Document Printer"), ("zpl", "ZPL Label Printer"), ("escpos", "ESC/POS Document Printer")], required=True)
     active = fields.Boolean(default=True)
     default = fields.Boolean(readonly=True)
     status = fields.Selection(

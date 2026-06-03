@@ -67,6 +67,7 @@ class IrActionsReport(models.Model):
             "printer_name": result["printer"].name,
             "printer_id": result["printer"].id,
             "backend": result["printer"].backend,
+            "printer_type": result["printer"].printer_type,
         }
         if result.get("printer_exception") and not self.env.context.get(
             "skip_printer_exception"
