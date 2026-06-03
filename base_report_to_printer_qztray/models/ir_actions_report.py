@@ -9,7 +9,7 @@ from odoo import models
 class IrActionsReport(models.Model):
     _inherit = "ir.actions.report"
 
-    def get_qz_tray_data(self, res_ids, report_type="pdf", report_name="", data=None):
+    def get_qz_tray_data(self, res_ids, report_type="pdf", report_name="", data=None, label=False):
         if report_type == "pdf":
             result = self.env["ir.actions.report"]._render_qweb_pdf(
                 report_name, res_ids, data
@@ -24,9 +24,17 @@ class IrActionsReport(models.Model):
             ]
         elif report_type == "text":
             result = self.env["ir.actions.report"]._render_qweb_text(
-                report_name, res_ids, data
-            )
-            data = [result[0].replace(b"\n", b"").decode("unicode_escape")]
+                    report_name, res_ids, data
+                )
+            if label:
+                data = [{
+                    "type": "raw",
+                    "format": "command",
+                    "flavor": "plain",
+                    "data": result[0].replace(b"\n", b"").decode("unicode_escape"),
+                }]
+            else:
+                data = [result[0].replace(b"\n", b"").decode("unicode_escape")]
         else:
             data = []
         return data

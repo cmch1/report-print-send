@@ -58,6 +58,7 @@ async function QZPrintDispatcher(action, env) {
                 action.context.active_ids,
                 action.report_type,
                 action.report_name,
+                action.label,
             ],
             kwargs: {data: action.data || {}},
             context: action.context,
